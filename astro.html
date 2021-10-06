@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+        <input  id="year" type="text" placeholder="Año">
+        <input id="month" type="text" placeholder="Mes">
+        <input id="day" type="text" placeholder="Día">
+        <button onclick="enviar()">Enviar</button>
+    
+    <div id="card"></div>
+
+
+    <script>
+            function enviar(){
+                let year = document.getElementById("year").value;
+                let month = document.getElementById("month").value;
+                let day = document.getElementById("day").value;
+            
+        
+            fetch(`https://api.nasa.gov/planetary/apod?api_key=9YEye2WWrX2mQjCE3tR1vsYUwW4xuoICKklpjLl8&date=${year}-${month}-${day}`).then(function obtener(data){
+            return data.json();
+        }).then(function mostrar(info){
+            document.getElementById("card").innerHTML=`
+            <h2>${info.title}</h2>
+            <img src=${info.url}/>
+            <p>${info.explanation}</p>`
+        })
+    };
+    </script>
+    
+</body>
+</html>
